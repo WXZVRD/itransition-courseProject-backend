@@ -6,19 +6,14 @@ class userController {
 
     async block(req, res) {
         try {
-            const { userId } = req.body;
+            const usersId = req.body;
 
-            console.log(userId)
-            const user = await User.findByPk(userId);
-            if (!user) {
-                return res.status(404).json({ error: 'user not found' });
-            }
+            await User.update(
+                { isBlocked: true },
+                { where: { id: usersId } }
+            );
 
-            await user.update({
-                isBlocked: true
-            });
-
-            res.status(200).json({ success: 'user has been blocked' });
+            res.status(200).json({ success: 'users has been blocked' });
             } catch (error) {
                 console.error(`Error: ${error}`);
                 res.status(500).json({ error: 'An error occurred while blocking the user' });
@@ -27,17 +22,14 @@ class userController {
 
     async unblock (req, res) {
         try {
-            const userId = req.body.userId;
-            const user = await User.findByPk(userId);
-            if (!user) {
-                return res.status(404).json({ error: 'user not found' });
-            }
+            const usersId = req.body;
 
-            await user.update({
-                isBlocked: false
-            });
+            await User.update(
+                { isBlocked: false },
+                { where: { id: usersId } }
+            );
 
-            res.status(200).json({ success: 'user has been unblocked' });
+            res.status(200).json({ success: 'users has been unblocked' });
         } catch (error) {
             console.error(`Error: ${error}`);
             res.status(500).json({ error: 'An error occurred while unblocking user' });
@@ -67,18 +59,26 @@ class userController {
         }
     }
 
+    async getOneUser (req, res) {
+        try {
+            const { userId } = req.query
+            const user = await User.findByPk(userId)
+
+            res.status(200).json(user);
+        } catch (error) {
+            console.error(`Error: ${error}`);
+            res.status(500).json({ error: 'An error occurred while fetching the user' });
+        }
+    }
+
     async makeAdmin (req, res) {
         try {
-            const userId = req.body.userId;
-            const user = await User.findByPk(userId);
+            const usersId = req.body;
 
-            if (!user) {
-                return res.status(404).json({ error: 'user not found' });
-            }
-
-            await user.update({
-                isAdmin: true
-            });
+            await User.update(
+                { isAdmin: true },
+                { where: { id: usersId } }
+            );
 
             res.status(200).json({ success: "user's rights changed" });
         } catch (error) {
@@ -89,16 +89,15 @@ class userController {
 
     async delete (req, res) {
         try {
-            const userId = req.body.userId;
-            const user = await User.findByPk(userId);
+            const usersId = req.body;
 
-            if (!user) {
-                return res.status(404).json({ error: 'user not found' });
-            }
+            console.log(usersId)
 
-            await user.destroy();
+            await User.destroy({
+                where:{ id: usersId }
+            })
 
-            res.status(200).json({ success: 'user has been deleted' });
+            res.status(200).json({ success: 'users has been deleted' });
         } catch (error) {
             console.error(`Error: ${error}`);
             res.status(500).json({ error: 'An error occurred while deleting the user' });

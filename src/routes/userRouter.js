@@ -10,8 +10,9 @@ const userController = require('../controllers/userController')
 
 router.post('/unblockUser', checkAuth, checkAccess, userController.unblock);
 router.post('/makeAdmin', checkAuth, checkAccess, userController.makeAdmin);
-router.delete('/deleteUser', checkAuth, checkAccess, userController.delete);
+router.post('/deleteUser', checkAuth, checkAccess, userController.delete);
 router.get('/getUsers', checkAuth, checkAccess, userController.getUsers);
+router.get('/getOneUser', userController.getOneUser);
 router.post('/blockUser', checkAuth, checkAccess, userController.block);
 
 

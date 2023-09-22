@@ -11,7 +11,7 @@ module.exports = {
             'google',
             {
                 session: false,
-                failureRedirect: '/',
+                failureRedirect: '/login',
             },
             (err, user) => {
                 if (err || !user) {
@@ -34,7 +34,7 @@ module.exports = {
 
                 res.cookie('user',  JSON.stringify(userData));
                 res.cookie('jwt', user.token);
-                res.redirect('https://itransition-course-project-frontend-zrt7.vercel.app/')
+                res.redirect('http://localhost:3000')
             }
         )(req, res, next);
     },
@@ -64,7 +64,7 @@ module.exports = {
 
                 res.cookie('user', JSON.stringify(userData));
                 res.cookie('jwt', user.token);
-                res.redirect('https://itransition-course-project-frontend-zrt7.vercel.app/')
+                res.redirect('http://localhost:3000')
             }
         )(req, res, next);
     },

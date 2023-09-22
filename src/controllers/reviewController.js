@@ -98,17 +98,20 @@ class reviewController {
         }
     }
 
-    async delete (req, res) {
+    async delete(req, res) {
         try {
-            const { reviewId } = req.params
-            await Review.destroy({where: {id: reviewId}})
+            const { reviewIds } = req.body;
 
-            await ESService.delete('reviews', reviewId)
+            await Review.destroy({ where: { id: reviewIds } });
 
-            res.json({succes: 'Succesfully deleted!'})
+            for (const reviewId of reviewIds) {
+                await ESService.delete('reviews', reviewId);
+            }
+
+            res.json({ success: 'Successfully deleted!' });
         } catch (error) {
             console.error(`Error: ${error}`);
-            res.status(500).json({error: 'An error occurred while deleting the review'});
+            res.status(500).json({ error: 'An error occurred while deleting the reviews' });
         }
     }
 
@@ -125,7 +128,7 @@ class reviewController {
                         model: Product,
                     }
                 ],
-                order: [['averageRating', 'DESC']],
+                order: [['grade', 'DESC']],
             });
 
             res.status(200).json(reviews)
@@ -162,9 +165,6 @@ class reviewController {
         try {
             const { reviewId, userId } = req.query
 
-            console.log(userId)
-
-
             const review = await Review.findByPk(reviewId, {
                 include: [
                     User,
@@ -199,6 +199,29 @@ class reviewController {
             } else {
                 res.json(review)
             }
+        } catch (error) {
+            console.error(`Error: ${error}`);
+            res.status(500).json({error: 'An error occurred while fetching reviews'});
+        }
+    }
+
+    async getAllReviewByUser (req, res) {
+        try {
+            const { userId } = req.query
+            const reviews = await Review.findAll({
+                where: {
+                  author: userId
+                },
+                include: [
+                    User,
+                    Product
+                ]
+            })
+            if (!reviews) {
+                return res.status(400).json({error: 'No review from by this account'})
+            }
+
+            res.status(200).json(reviews)
         } catch (error) {
             console.error(`Error: ${error}`);
             res.status(500).json({error: 'An error occurred while fetching reviews'});
@@ -246,23 +269,61 @@ class reviewController {
         }
     }
 
-    async update (req, res) {
-        const { reviewId, tags } = req.body
+    async update(req, res) {
+        const t = await sequelize.transaction();
         try {
-            const review = await Review.findByPk(reviewId);
-            if (!review) {
-                return res.status(400).json({error: 'No current review by this id'});
-            }
-            if (tags) {
-                await tagService.createOrUpdateTags(tags.tags);
+            const reviewData = req.body;
+
+            const currentReview = await Review.findByPk(reviewData.id);
+
+            if (!currentReview) {
+                return res.status(400).json({ error: 'Review not found' });
             }
 
-            await review.update(tags);
 
-            res.json(review);
+            await currentReview.update({
+                title: reviewData.title,
+                text: reviewData.text,
+                tags: reviewData.tags,
+                img: reviewData.img,
+                grade: reviewData.product.averageRating
+            });
+
+            const product = await Product.findByPk(currentReview.productId);
+
+            const updatedProductData = {
+                title: reviewData.product.title,
+                type: reviewData.product.type,
+                id: reviewData.product.id
+            };
+
+            const rating = await Rating.findOne({
+                where: { productId: currentReview.productId },
+            });
+
+            if (rating) {
+                rating.reviewerRate = reviewData.product.averageRating;
+                await rating.save();
+            }
+
+            const ratings = await Rating.findAll({
+                where: { productId: currentReview.productId },
+            });
+            const averageRating = calculateRate(ratings);
+
+            if (product) {
+                await product.update({
+                    averageRating: averageRating,
+                    ...updatedProductData,
+                });
+            }
+
+            await t.commit();
+            res.json(reviewData);
         } catch (error) {
             console.error(`Error: ${error}`);
-            res.status(500).json({error: 'An error occurred while updating reviews'});
+            await t.rollback();
+            res.status(500).json({ error: 'An error occurred while updating reviews' });
         }
     }
 

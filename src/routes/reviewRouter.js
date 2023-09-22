@@ -14,10 +14,11 @@ router.get('/similar', reviewController.getSimilar);
 router.get('/tags', reviewController.getTags);
 router.get('/latest', reviewController.getLatest);
 router.get('/getById', reviewController.getReview);
+router.get('/getReviewByUser', reviewController.getAllReviewByUser);
 router.post('/putLike', checkAuth, reviewController.putLike);
 router.post('/rateProduct', checkAuth, reviewController.rateProduct);
 router.post('/create', checkAuth, reviewValid, reviewController.create);
-router.delete('/delete/:reviewId', checkAuth, checkAccess, reviewController.delete);
+router.post('/delete', checkAuth, checkAccess, reviewController.delete);
 router.post('/update', checkAuth, checkAccess, reviewValid, reviewController.update);
 router.post('/upload', checkAuth, upload.single('img'), reviewController.upload);
 
