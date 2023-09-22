@@ -34,7 +34,7 @@ module.exports = {
 
                 res.cookie('user',  JSON.stringify(userData));
                 res.cookie('jwt', user.token);
-                res.redirect('http://localhost:3000')
+                res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
         )(req, res, next);
     },
@@ -64,7 +64,7 @@ module.exports = {
 
                 res.cookie('user', JSON.stringify(userData));
                 res.cookie('jwt', user.token);
-                res.redirect('http://localhost:3000')
+                res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
         )(req, res, next);
     },
