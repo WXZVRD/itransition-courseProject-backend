@@ -31,9 +31,26 @@ module.exports = {
 
                 console.log(userData)
 
-                res.cookie('user', JSON.stringify(userData), { domain: 'itransition-courseproject-backend.onrender.com', path: '/', httpOnly: false, secure: false, sameSite: false });
-                res.cookie('jwt', user.token, { domain: '.itransition-course-project-frontend.vercel.app', path: '/', httpOnly: false, secure: false, sameSite: false });
-
+                res.cookie('user', JSON.stringify(userData), 
+                    { 
+                        domain: 'itransition-courseproject-backend.onrender.com', 
+                        path: '/', 
+                        httpOnly: false, 
+                        secure: false, 
+                        sameSite: false,
+                        credentials: 'include',
+                        withCredentials: true
+                    });
+                res.cookie('jwt', user.token, 
+                    { 
+                        domain: 'itransition-courseproject-backend.onrender.com', 
+                        path: '/', 
+                        httpOnly: false, 
+                        secure: false, 
+                        sameSite: false,
+                        credentials: 'include',
+                        withCredentials: true
+                    });
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
         )(req, res, next);
@@ -62,9 +79,27 @@ module.exports = {
                     likes: user.user.likes
                 }
 
-                res.cookie('user', JSON.stringify(userData), { domain: 'itransition-courseproject-backend.onrender.com', path: '/', httpOnly: false, secure: false, sameSite: false });
-                res.cookie('jwt', user.token, { domain: '.itransition-course-project-frontend.vercel.app', path: '/', httpOnly: false, secure: false, sameSite: false });
-
+                res.cookie('user', JSON.stringify(userData), 
+                    { 
+                        domain: 'itransition-courseproject-backend.onrender.com', 
+                        path: '/', 
+                        httpOnly: false, 
+                        secure: false, 
+                        sameSite: false,
+                        credentials: 'include',
+                        withCredentials: true
+                    });
+                res.cookie('jwt', user.token, 
+                    { 
+                        domain: 'itransition-courseproject-backend.onrender.com', 
+                        path: '/', 
+                        httpOnly: false, 
+                        secure: false, 
+                        sameSite: false,
+                        credentials: 'include',
+                        withCredentials: true
+                    });
+                
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
         )(req, res, next);
