@@ -31,11 +31,6 @@ module.exports = {
 
                 console.log(userData)
 
-                res.cookie('user', JSON.stringify(userData), {domain: '.vercel.app', path: '/',httpOnly:false, 
-               secure:false,sameSite:false});
-                res.cookie('user', JSON.stringify(userData), {domain: '.itransition-course-project-frontend.vercel.app', path: '/',httpOnly:false, 
-               secure:false,sameSite:false});
-                
                 res.cookie('jwt', user.token, {domain: '.vercel.app', path: '/',httpOnly:false, 
                secure:false,sameSite:false});
                 res.cookie('jwt', user.token, {domain: '.itransition-course-project-frontend.vercel.app', path: '/',httpOnly:false, 
@@ -69,11 +64,6 @@ module.exports = {
                     likes: user.user.likes
                 }
 
-                                res.cookie('user', JSON.stringify(userData), {domain: '.vercel.app', path: '/',httpOnly:false, 
-               secure:false,sameSite:false});
-                res.cookie('user', JSON.stringify(userData), {domain: '.itransition-course-project-frontend.vercel.app', path: '/',httpOnly:false, 
-               secure:false,sameSite:false});
-                
                 res.cookie('jwt', user.token, {domain: '.vercel.app', path: '/',httpOnly:false, 
                secure:false,sameSite:false});
                 res.cookie('jwt', user.token, {domain: '.itransition-course-project-frontend.vercel.app', path: '/',httpOnly:false, 
