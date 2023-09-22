@@ -31,10 +31,9 @@ module.exports = {
 
                 console.log(userData)
 
-                res.cookie('jwt', user.token, {domain: '.vercel.app', path: '/',httpOnly:false, 
-               secure:false,sameSite:false});
-                res.cookie('jwt', user.token, {domain: '.itransition-course-project-frontend.vercel.app', path: '/',httpOnly:false, 
-               secure:false,sameSite:false});
+                res.cookie('jwt', user.token, { domain: '.onrender.com', path: '/' });
+                res.cookie('jwt', user.token, { domain: 'itransition-courseproject-backend.onrender.com', path: '/' });
+
 
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
