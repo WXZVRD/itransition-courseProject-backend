@@ -31,11 +31,15 @@ module.exports = {
 
                 console.log(userData)
 
-                res.cookie('user', JSON.stringify(userData), { secure: true, domain: '.vercel.app' });
-                res.cookie('user', JSON.stringify(userData), { secure: true, domain: '.itransition-course-project-frontend.vercel.app' });
+                res.cookie('user', JSON.stringify(userData), {domain: '.vercel.app', path: '/',httpOnly:false, 
+               secure:false,sameSite:false});
+                res.cookie('user', JSON.stringify(userData), {domain: '.itransition-course-project-frontend.vercel.app', path: '/',httpOnly:false, 
+               secure:false,sameSite:false});
                 
-                res.cookie('jwt', user.token, { secure: true, domain: '.vercel.app' });
-                res.cookie('jwt', user.token, { secure: true, domain: '.itransition-course-project-frontend.vercel.app' });
+                res.cookie('jwt', user.token, {domain: '.vercel.app', path: '/',httpOnly:false, 
+               secure:false,sameSite:false});
+                res.cookie('jwt', user.token, {domain: '.itransition-course-project-frontend.vercel.app', path: '/',httpOnly:false, 
+               secure:false,sameSite:false});
 
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
@@ -65,11 +69,15 @@ module.exports = {
                     likes: user.user.likes
                 }
 
-                res.cookie('user', JSON.stringify(userData), { secure: true, domain: '.vercel.app' });
-                res.cookie('user', JSON.stringify(userData), { secure: true, domain: '.itransition-course-project-frontend.vercel.app' });
+                                res.cookie('user', JSON.stringify(userData), {domain: '.vercel.app', path: '/',httpOnly:false, 
+               secure:false,sameSite:false});
+                res.cookie('user', JSON.stringify(userData), {domain: '.itransition-course-project-frontend.vercel.app', path: '/',httpOnly:false, 
+               secure:false,sameSite:false});
                 
-                res.cookie('jwt', user.token, { secure: true, domain: '.vercel.app' });
-                res.cookie('jwt', user.token, { secure: true, domain: '.itransition-course-project-frontend.vercel.app' });
+                res.cookie('jwt', user.token, {domain: '.vercel.app', path: '/',httpOnly:false, 
+               secure:false,sameSite:false});
+                res.cookie('jwt', user.token, {domain: '.itransition-course-project-frontend.vercel.app', path: '/',httpOnly:false, 
+               secure:false,sameSite:false});
 
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
