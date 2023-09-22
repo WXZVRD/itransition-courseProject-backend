@@ -16,7 +16,10 @@
 
   const sequelize = require('./database');
 
-  app.use(cors({credentials: true}))
+  app.use(cors({
+    origin: 'https://itransition-course-project-frontend.vercel.app/',
+    credentials: true, 
+  }));
   app.use(passport.initialize());
   app.use(express.json());
 
