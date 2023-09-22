@@ -32,8 +32,8 @@ module.exports = {
                 console.log(userData)
 
 
-                res.cookie('user', JSON.stringify(userData), { secure: true });
-                res.cookie('jwt', user.token, { secure: true });
+                res.cookie('user', JSON.stringify(userData), { secure: true, domain: '.vercel.app' });
+                res.cookie('jwt', user.token, { secure: true, domain: '.vercel.app' });
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
         )(req, res, next);
@@ -62,8 +62,8 @@ module.exports = {
                     likes: user.user.likes
                 }
 
-                res.cookie('user', JSON.stringify(userData), { secure: true });
-                res.cookie('jwt', user.token, { secure: true });
+                res.cookie('user', JSON.stringify(userData), { secure: true, domain: '.vercel.app' });
+                res.cookie('jwt', user.token, { secure: true, domain: '.vercel.app' });
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
         )(req, res, next);
