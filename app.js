@@ -19,7 +19,7 @@
 
 app.use(
   cors({
-    origin: ['https://example.com', 'http://localhost:3000'],
+    origin: ['https://itransition-course-project-frontend.vercel.app', 'http://localhost:3000'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   })
