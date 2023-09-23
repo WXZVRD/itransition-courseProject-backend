@@ -4,6 +4,18 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
 
+    getMe: async (req, res) => {
+        try{
+            const user = req.session.user
+            if (!user){
+                res.send("NO USER")
+            }
+            res.json(req.session)
+        } catch (error){
+            console.log(error)
+        }
+    },
+
     googleAuth: passport.authenticate('google', { scope: ['profile'] }),
 
     googleAuthCallback: (req, res, next) => {
