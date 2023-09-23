@@ -9,6 +9,8 @@ router.get('/google/callback', authController.googleAuthCallback);
 router.get('/github', authController.githubAuth);
 router.get('/github/callback', authController.githubAuthCallback);
 
+router.get('/getMe', authController.getMe)
+
 router.post('/logout', authController.logout)
 
 module.exports = router;
