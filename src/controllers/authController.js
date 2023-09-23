@@ -32,19 +32,21 @@ module.exports = {
                 console.log(userData)
 
                 res.cookie('user', JSON.stringify(userData), 
-                    { 
-                        domain: 'itransition-course-project-frontend.vercel.app', 
-                        secure: true,
-                        sameSite: 'none',
-                        httpOnly: false
-                    });
+                  { 
+                    domain: 'itransition-courseproject-backend.onrender.com', 
+                    secure: true,
+                    sameSite: 'none',
+                    httpOnly: false
+                  }
+                );
                 res.cookie('jwt', user.token, 
-                    { 
-                        domain: 'itransition-course-project-frontend.vercel.app', 
-                        secure: true,
-                        sameSite: 'none',
-                        httpOnly: false
-                    });
+                  { 
+                    domain: 'itransition-courseproject-backend.onrender.com', 
+                    secure: true,
+                    sameSite: 'none',
+                    httpOnly: false
+                  }
+                );
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
         )(req, res, next);
