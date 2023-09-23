@@ -2,10 +2,13 @@ const express = require('express');
 const passport = require('passport')
 const router = express.Router()
 
-
 router.get('/login', (req, res) => {
    if (req.user){
-       res.json(req.user)
+       console.log('User logged in:', req.user); // Логирование информации о пользователе
+       res.json(req.user);
+   } else {
+       console.log('User not logged in'); // Логирование, если пользователь не аутентифицирован
+       res.json({ message: 'User not logged in' });
    }
 })
 
@@ -18,7 +21,7 @@ router.get('/google/callback',
         failureFlash: true,
         keepSessionInfo: true
     }), (req, res) => {
-
+        console.log('User authenticated with Google:', req.user); // Логирование информации о пользователе
         res.redirect('https://itransition-course-project-frontend.vercel.app')
     })
 
@@ -31,7 +34,7 @@ router.get('/github/callback',
         failureFlash: true,
         keepSessionInfo: true
     }), (req, res) => {
-
+        console.log('User authenticated with GitHub:', req.user); // Логирование информации о пользователе
         res.redirect('https://itransition-course-project-frontend.vercel.app')
     })
 
