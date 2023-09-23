@@ -36,12 +36,14 @@ module.exports = {
                         domain: 'itransition-courseproject-backend.onrender.com', 
                         secure: true,
                         sameSite: 'none',
+                        httpOnly: false
                     });
                 res.cookie('jwt', user.token, 
                     { 
                         domain: 'itransition-courseproject-backend.onrender.com', 
                         secure: true,
                         sameSite: 'none',
+                        httpOnly: false
                     });
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
