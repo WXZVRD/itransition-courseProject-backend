@@ -31,6 +31,11 @@ module.exports = {
 
                 console.log(userData)
 
+                req.session.user = userData
+                req.session.token = user.token
+
+                console.log(req.session)
+
                 res.cookie('user', JSON.stringify(userData), 
                   { 
                     domain: 'itransition-courseproject-backend.onrender.com', 
