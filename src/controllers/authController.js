@@ -51,7 +51,7 @@ module.exports = {
                 res.cookie('user', JSON.stringify(userData), 
                   { 
                     domain: 'itransition-courseproject-backend.onrender.com', 
-                    secure: true,
+                    secure: false,
                     sameSite: 'none',
                     httpOnly: false
                   }
@@ -59,7 +59,7 @@ module.exports = {
                 res.cookie('jwt', user.token, 
                   { 
                     domain: 'itransition-courseproject-backend.onrender.com', 
-                    secure: true,
+                    secure: false,
                     sameSite: 'none',
                     httpOnly: false
                   }
