@@ -53,7 +53,7 @@ module.exports = {
                     domain: 'itransition-courseproject-backend.onrender.com', 
                     secure: true,
                     sameSite: 'none',
-                    httpOnly: true
+                    httpOnly: false
                   }
                 );
                 res.cookie('jwt', user.token, 
@@ -61,7 +61,7 @@ module.exports = {
                     domain: 'itransition-courseproject-backend.onrender.com', 
                     secure: true,
                     sameSite: 'none',
-                    httpOnly: true
+                    httpOnly: false
                   }
                 );
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
