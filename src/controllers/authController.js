@@ -33,14 +33,14 @@ module.exports = {
 
                 res.cookie('user', JSON.stringify(userData), 
                     { 
-                        domain: 'itransition-courseproject-backend.onrender.com', 
+                        domain: 'itransition-course-project-frontend.vercel.app', 
                         secure: true,
                         sameSite: 'none',
                         httpOnly: false
                     });
                 res.cookie('jwt', user.token, 
                     { 
-                        domain: 'itransition-courseproject-backend.onrender.com', 
+                        domain: 'itransition-course-project-frontend.vercel.app', 
                         secure: true,
                         sameSite: 'none',
                         httpOnly: false
