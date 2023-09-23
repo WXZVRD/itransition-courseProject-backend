@@ -11,8 +11,7 @@ router.get('/login', (req, res) => {
        res.json(req.session);
    } else {
        res.json({
-           token:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRjY2Y5OGY0LThjMzYtNDBhMC05YzY2LTFiMDUyMjY1ZDhiMSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY5NTQ5ODM4NiwiZXhwIjoxNjk1OTMwMzg2fQ.5Y5V_hqV8BBGgnnOIpJG9xejIZPsUDxss5tcz
-FxHnNc',
+           token:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRjY2Y5OGY0LThjMzYtNDBhMC05YzY2LTFiMDUyMjY1ZDhiMSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY5NTQ5ODM4NiwiZXhwIjoxNjk1OTMwMzg2fQ.5Y5V_hqV8BBGgnnOIpJG9xejIZPsUDxss5tczFxHnNc',
            user: {
               id: 'dccf98f4-8c36-40a0-9c66-1b052265d8b1',
               googleId: '103983730537850764958',
