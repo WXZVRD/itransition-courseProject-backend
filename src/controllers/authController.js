@@ -34,22 +34,14 @@ module.exports = {
                 res.cookie('user', JSON.stringify(userData), 
                     { 
                         domain: 'itransition-courseproject-backend.onrender.com', 
-                        path: '/', 
-                        httpOnly: false, 
-                        secure: false, 
-                        sameSite: false,
-                        credentials: 'include',
-                        withCredentials: true
+                        secure: true,
+                        sameSite: 'none',
                     });
                 res.cookie('jwt', user.token, 
                     { 
                         domain: 'itransition-courseproject-backend.onrender.com', 
-                        path: '/', 
-                        httpOnly: false, 
-                        secure: false, 
-                        sameSite: false,
-                        credentials: 'include',
-                        withCredentials: true
+                        secure: true,
+                        sameSite: 'none',
                     });
                 res.redirect('https://itransition-course-project-frontend.vercel.app')
             }
