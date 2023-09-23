@@ -9,7 +9,7 @@ module.exports = () => {
         {
             clientID: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
-            callbackURL: 'https://itransition-courseproject-backend.onrender.com/auth/github/callback',
+            callbackURL: '/auth/github/callback',
             scope: [ 'user:email' ],
         },
         async (accessToken, refreshToken, profile, done) => {

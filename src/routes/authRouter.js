@@ -1,16 +1,38 @@
 const express = require('express');
-const authController = require('../controllers/authController');
+const passport = require('passport')
+const router = express.Router()
 
-const router = express.Router();
 
-router.get('/google', authController.googleAuth);
-router.get('/google/callback', authController.googleAuthCallback);
+router.get('/login', (req, res) => {
+   if (req.user){
+       res.json(req.user)
+   }
+})
 
-router.get('/github', authController.githubAuth);
-router.get('/github/callback', authController.githubAuthCallback);
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 
-router.get('/getMe', authController.getMe)
+router.get('/google/callback',
+    passport.authenticate('google', {
+        session: true,
+        failureRedirect: '/login',
+        failureFlash: true,
+        keepSessionInfo: true
+    }), (req, res) => {
 
-router.post('/logout', authController.logout)
+        res.redirect('https://itransition-course-project-frontend.vercel.app')
+    })
+
+router.get('/github',  passport.authenticate('github', { scope: ['profile'] }))
+
+router.get('/github/callback',
+    passport.authenticate('github', {
+        session: true,
+        failureRedirect: '/login',
+        failureFlash: true,
+        keepSessionInfo: true
+    }), (req, res) => {
+
+        res.redirect('https://itransition-course-project-frontend.vercel.app')
+    })
 
 module.exports = router;

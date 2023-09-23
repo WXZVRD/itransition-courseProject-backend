@@ -1,5 +1,5 @@
-  const googleStrategy = require('./src/strategy/googleStrategy');
   const githubStrategy = require('./src/strategy/githubStrategy');
+  const googleStrategy = require('./src/strategy/googleStrategy');
 
   const passport = require('passport');
   const express = require('express');
@@ -17,27 +17,13 @@
 
   const sequelize = require('./database');
 
-app.use(
-  cors({
-    origin: ['https://itransition-course-project-frontend.vercel.app', 'http://localhost:3000'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-  })
-);  
-app.use(
-  session({
-    secret: '12345', 
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: false,
-      secure: true,   
-      sameSite: 'none',
-      maxAge: 100 * 24 * 60 * 60,
-    },
-  })
-);
-
+  app.use(cors({ origin: '*', credentials: true }));
+  app.use(session({
+    secret: 'keyboard cat',
+    cookie: { secure: 'true' , sameSite:'none' },
+    resave: false,
+    saveUninitialized: false,
+  }))
   app.use(passport.initialize());
   app.use(passport.session())
   app.use(express.json());

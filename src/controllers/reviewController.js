@@ -36,7 +36,7 @@ class reviewController {
 
             const productId = req.body.product.id;
             const author = req.user.id;
-            const rating = parseInt(req.body.product.averageRating);
+            const rating = parseFloat(req.body.product.averageRating);
 
             const product = await Product.findByPk(productId);
 

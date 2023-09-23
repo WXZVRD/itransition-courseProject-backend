@@ -3,13 +3,14 @@ const User = require('../Models/userModel');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 const { v4: uuidv4 } = require('uuid');
+const passport = require("passport");
 
 module.exports = () => {
     return new GoogleStrategy(
         {
             clientID: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
-            callbackURL: 'https://itransition-courseproject-backend.onrender.com/auth/google/callback'
+            callbackURL: '/auth/google/callback',
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
@@ -40,8 +41,15 @@ module.exports = () => {
                 return done(null, { user: newUser, token });
             } catch (error) {
                 console.error('Error:', error);
-                return done(error, false);
             }
         }
     );
 };
+
+passport.serializeUser((user, done) => {
+    return done(null , user)
+})
+
+passport.deserializeUser((user, done) => {
+    return done(null , user)
+})
