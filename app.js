@@ -17,7 +17,7 @@
 
   const sequelize = require('./database');
 
-  app.use(cors({ origin: '*', credentials: true }));
+  app.use(cors({ origin: 'https://itransition-course-project-frontend.vercel.app', credentials: true }));
   app.use(session({
     secret: 'keyboard cat',
     cookie: { secure: 'true' , sameSite:'none' },
