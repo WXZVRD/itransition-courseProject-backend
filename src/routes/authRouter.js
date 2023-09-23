@@ -6,10 +6,7 @@ router.get('/login', (req, res) => {
    if (req.user){
        console.log('User logged in:', req.user); // Логирование информации о пользователе
        res.json(req.user);
-   } else {
-       console.log('User not logged in'); // Логирование, если пользователь не аутентифицирован
-       res.json({ message: 'User not logged in' });
-   }
+   } 
 })
 
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
