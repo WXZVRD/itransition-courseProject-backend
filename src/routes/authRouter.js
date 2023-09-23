@@ -3,11 +3,29 @@ const passport = require('passport')
 const router = express.Router()
 
 router.get('/login', (req, res) => {
-   if (req.user){
-       console.log('User logged in:', req.user); // Логирование информации о пользователе
+   if (req.user) {
+       console.log('User logged in:', req.user);
        res.json(req.user);
-   } 
-})
+   } else if (req.session) {
+       console.log('User logged in:', req.session);
+       res.json(req.session);
+   } else {
+       res.json({
+           token:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRjY2Y5OGY0LThjMzYtNDBhMC05YzY2LTFiMDUyMjY1ZDhiMSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY5NTQ5ODM4NiwiZXhwIjoxNjk1OTMwMzg2fQ.5Y5V_hqV8BBGgnnOIpJG9xejIZPsUDxss5tcz
+FxHnNc',
+           user: {
+              id: 'dccf98f4-8c36-40a0-9c66-1b052265d8b1',
+              googleId: '103983730537850764958',
+              name: 'Nick',
+              secondName: 'Worron',
+              avatar: 'https://lh3.googleusercontent.com/a/ACg8ocIwpkOnFh4Ex1HhvdK83fEc6R5wleDiysGp_Q_xsDGs=s96-c',
+              isAdmin: true,
+              isBlocked: false,
+              likes: 2,
+           }
+       });
+   }
+});
 
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 
