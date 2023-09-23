@@ -23,18 +23,21 @@ app.use(
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   })
-);  app.use(
+);  
+app.use(
   session({
     secret: '12345', 
     resave: true,
     saveUninitialized: true,
     cookie: {
-      secure: true, 
+      httpOnly: false,
+      secure: true,   
       sameSite: 'none',
       maxAge: 100 * 24 * 60 * 60,
     },
   })
 );
+
   app.use(passport.initialize());
   app.use(passport.session())
   app.use(express.json());
