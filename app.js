@@ -5,6 +5,7 @@
   const express = require('express');
   const cors = require('cors');
   const app = express();
+  const session = require('express-session')
 
   const commentRouter = require('./src/routes/commentRouter');
   const reviewRouter = require('./src/routes/reviewRouter');
@@ -16,11 +17,26 @@
 
   const sequelize = require('./database');
 
-  app.use(cors({
-    origin: '*',
-    credentials: true, 
-  }));
+app.use(
+  cors({
+    origin: ['https://example.com', 'http://localhost:3000'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  })
+);  app.use(
+  session({
+    secret: '12345', 
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      secure: true, 
+      sameSite: 'none',
+      maxAge: 100 * 24 * 60 * 60,
+    },
+  })
+);
   app.use(passport.initialize());
+  app.use(passport.session())
   app.use(express.json());
 
   passport.use(googleStrategy());
