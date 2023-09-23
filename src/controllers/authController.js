@@ -50,6 +50,7 @@ module.exports = {
 
                 res.cookie('user', JSON.stringify(userData), 
                   { 
+                    domain: '.vercel.app',
                     secure: true,
                     sameSite: 'none',
                     httpOnly: false
@@ -57,6 +58,7 @@ module.exports = {
                 );
                 res.cookie('jwt', user.token, 
                   { 
+                    domain: 'https://itransition-course-project-frontend.vercel.app',
                     secure: true,
                     sameSite: 'none',
                     httpOnly: false
