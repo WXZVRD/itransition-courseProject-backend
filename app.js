@@ -20,7 +20,7 @@
   app.use(cors({ origin: 'https://itransition-course-project-frontend.vercel.app', credentials: true }));
   app.use(session({
     secret: 'keyboard cat',
-    cookie: { secure: 'true' , sameSite:'none' },
+    cookie: { secure: 'true' , sameSite:'none', httpOnly: false },
     resave: false,
     saveUninitialized: false,
   }))
