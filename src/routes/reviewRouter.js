@@ -19,7 +19,7 @@ router.post('/putLike', checkAuth, reviewController.putLike);
 router.post('/rateProduct', checkAuth, reviewController.rateProduct);
 router.post('/create', checkAuth, reviewValid, reviewController.create);
 router.post('/delete', checkAuth, checkAccess, reviewController.delete);
-router.post('/update', checkAuth, checkAccess, reviewValid, reviewController.update);
+router.post('/update', checkAuth, reviewValid, reviewController.update);
 router.post('/upload', checkAuth, upload.single('img'), reviewController.upload);
 
 module.exports = router;

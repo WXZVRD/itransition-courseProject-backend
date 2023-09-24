@@ -3,14 +3,18 @@ const { Op } = require('sequelize');
 
 const checkAccess = async (req, res, next) => {
     try {
+        console.log("ITS CHECK ACCESS")
         if (req.user.role === 'admin') {
             return next();
         }
+        console.log("ITS REVIEW BEFORE")
 
         const {reviewIds} = req.body;
+        console.log("ITS REVIEW")
 
         const userId = req.user.id;
         console.log(reviewIds);
+        console.log(userId)
 
         const count = await Review.count({
             where: {

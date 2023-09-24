@@ -10,17 +10,18 @@ module.exports = () => {
         {
             clientID: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
-            callbackURL: 'https://itransition-courseproject-backend.onrender.com/auth/google/callback',
+            callbackURL: '/auth/google/callback',
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
                 const existingUser = await User.findOne({ where: { googleId: profile.id } });
-
+                console.log("is STRATEGY")
                 if (existingUser) {
                     const token = jwt.sign(
                         { id: existingUser.id, role: existingUser.isAdmin ? 'admin' : 'user' },
                         JWT_SECRET, { expiresIn: '5d' }
                     );
+
                     return done(null, { user: existingUser, token });
                 }
 
@@ -38,7 +39,7 @@ module.exports = () => {
                     JWT_SECRET, { expiresIn: '5d' }
                 );
 
-                return done(null, { user: newUser, token });
+                return done(null, { user: newUser.dataValues, token });
             } catch (error) {
                 console.error('Error:', error);
             }

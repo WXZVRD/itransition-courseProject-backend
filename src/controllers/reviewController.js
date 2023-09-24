@@ -272,6 +272,8 @@ class reviewController {
     async update(req, res) {
         const t = await sequelize.transaction();
         try {
+            console.log("ITS UPDATE")
+
             const reviewData = req.body;
 
             const currentReview = await Review.findByPk(reviewData.id);
@@ -329,9 +331,12 @@ class reviewController {
 
     async upload (req, res) {
         try {
+            console.log("STARTED UPLOADING FILE")
             if (!req.file) {
+                console.log("No file to upload")
                 return res.status(400).json({error: 'No file uploaded'});
             }
+            console.log("Save file to backend upload directory")
 
             const extName = path.extname(req.file.originalname).toLowerCase();
             const tempFilePath = path.join(__dirname, '../../uploads', `temp${extName}`);
@@ -342,6 +347,9 @@ class reviewController {
                 folder: 'uploads',
                 public_id: uuid()
             });
+
+            console.log("results: ")
+            console.log(result)
 
             fs.unlinkSync(tempFilePath);
 
